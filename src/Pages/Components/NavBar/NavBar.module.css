@@ -9,13 +9,23 @@
     background-color: #fff;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
-.content {
+.content1 {
     width: 84%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
+
+.content2 {
+    width: 84%;
+    display: flex;
+    flex-direction: row;
+    padding: 2.5vh 0.5vh;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .Logo {
     font-family: "Proza Libre", sans-serif;
 }
@@ -25,3 +35,21 @@
     justify-content: space-between;
     align-items: center;
 }
+/* .category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e7ecef;
+    padding: 1vh 0;
+    padding-left: 0.5vw;
+
+    border-radius: 6px;
+    cursor: pointer;
+    width: 18.5vw;
+} */
+/* .categoryIcon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 6.5em;
+} */

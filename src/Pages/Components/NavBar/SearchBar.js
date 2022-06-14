@@ -1,6 +1,6 @@
 import SearchIcon from "@mui/icons-material/Search";
-import { Container } from "@mui/material";
 import searchStyles from "./SearchBar.module.css";
+
 const SearchBar = () => {
     return (
         <div className={searchStyles.searchBody}>
