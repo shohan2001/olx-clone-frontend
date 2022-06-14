@@ -1,5 +1,6 @@
 import SearchIcon from "@mui/icons-material/Search";
 import searchStyles from "./SearchBar.module.css";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const SearchBar = () => {
     return (
@@ -20,7 +21,9 @@ const SearchBar = () => {
                         <SearchIcon fontSize="small" />
                     </button> */}
                 </div>
-                <div className={searchStyles.category}>All Categories</div>
+                <div className={searchStyles.category}>
+                    All Categories <KeyboardArrowDownIcon color="#495057" />
+                </div>
             </div>
         </div>
     );

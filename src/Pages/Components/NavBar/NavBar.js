@@ -66,7 +66,7 @@ const NavBar = () => {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
-                        width: "18.5vw",
+                        width: "19vw",
                         backgroundColor: "secondary.main",
                         borderRadius: "7px",
                         paddingRight: 1,
@@ -106,7 +106,7 @@ const NavBar = () => {
                         onClick={handleClose}
                         sx={{
                             color: "#495057",
-                            width: "18.5vw",
+                            width: "19vw",
                         }}
                     >
                         <TimeToLeaveIcon
@@ -182,10 +182,46 @@ const NavBar = () => {
                     </MenuItem>
                 </Menu>
 
-                <Button variant="contained" sx={{ borderRadius: 2 }}>
-                    <AddIcon fontSize="small" sx={{ paddingRight: 0 }} />
-                    Sell
-                </Button>
+                <Box
+                    sx={{
+                        width: "24vw",
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        alignItems: "center",
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            fontSize: "0.9rem",
+                            fontWeight: 300,
+                            cursor: "pointer",
+                        }}
+                    >
+                        Home
+                    </Typography>
+                    <Typography
+                        sx={{
+                            fontSize: "0.9rem",
+                            fontWeight: 300,
+                            cursor: "pointer",
+                        }}
+                    >
+                        User Account
+                    </Typography>
+                    <Typography
+                        sx={{
+                            fontSize: "0.9rem",
+                            fontWeight: 300,
+                            cursor: "pointer",
+                        }}
+                    >
+                        Pages
+                    </Typography>
+                    <Button variant="contained" sx={{ borderRadius: 2 }}>
+                        <AddIcon fontSize="small" sx={{ paddingRight: 0 }} />
+                        Sell
+                    </Button>
+                </Box>
             </div>
         </div>
     );
