@@ -14,7 +14,7 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import AddIcon from "@mui/icons-material/Add";
 
 const NavBar = () => {
-    const [isLoggdIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
     const handleClick = (e) => {
@@ -33,7 +33,7 @@ const NavBar = () => {
                 <Container sx={{ width: "56%", fontSize: "0.85rem" }}>
                     <SearchBar />
                 </Container>
-                {isLoggdIn ? (
+                {!isLoggedIn ? (
                     <div>Login</div>
                 ) : (
                     <div className={navStyles.icons}>

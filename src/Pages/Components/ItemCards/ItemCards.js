@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 
 const ItemCards = ({ cardDetails }) => {
+    console.log(cardDetails);
     return (
         <Card
             sx={{
@@ -22,11 +23,11 @@ const ItemCards = ({ cardDetails }) => {
             <CardMedia
                 component="img"
                 width="200"
-                image={cardDetails.image}
+                src={cardDetails.images[0]}
                 alt={cardDetails.title}
                 sx={{
                     height: 290,
-                    width: 290,
+                    width: 280,
                 }}
             />
             <CardContent>
