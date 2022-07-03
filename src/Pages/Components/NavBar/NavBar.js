@@ -8,12 +8,13 @@ import { Fab, Typography, Box, Button, Menu, MenuItem } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import AppsIcon from "@mui/icons-material/Apps";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-
+import { Link, useNavigate } from "react-router-dom";
 import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import AddIcon from "@mui/icons-material/Add";
 
 const NavBar = () => {
+    const navigate = useNavigate();
     const [isLoggedIn, setIsLoggedIn] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
@@ -27,7 +28,13 @@ const NavBar = () => {
     return (
         <div className={navStyles.navBody}>
             <div className={navStyles.content1}>
-                <div className={navStyles.Logo}>
+                <div
+                    className={navStyles.Logo}
+                    onClick={() => {
+                        navigate("/");
+                    }}
+                >
+                    {" "}
                     <h2>Olx IITG</h2>
                 </div>
                 <Container sx={{ width: "56%", fontSize: "0.85rem" }}>
@@ -126,7 +133,20 @@ const NavBar = () => {
                             fontSize="medium"
                             sx={{ paddingRight: 1 }}
                         />
-                        Bikes
+                        Bikes/Scooters
+                    </MenuItem>
+                    <MenuItem
+                        onClick={handleClose}
+                        sx={{
+                            color: "#495057",
+                            width: "18.5vw",
+                        }}
+                    >
+                        <PhoneAndroidIcon
+                            fontSize="medium"
+                            sx={{ paddingRight: 1 }}
+                        />
+                        Cycle
                     </MenuItem>
                     <MenuItem
                         onClick={handleClose}
@@ -161,11 +181,11 @@ const NavBar = () => {
                             width: "18.5vw",
                         }}
                     >
-                        <PhoneAndroidIcon
+                        <TimeToLeaveIcon
                             fontSize="medium"
                             sx={{ paddingRight: 1 }}
                         />
-                        Cycle
+                        Electronic Accessories
                     </MenuItem>
                     <MenuItem
                         onClick={handleClose}
@@ -178,7 +198,72 @@ const NavBar = () => {
                             fontSize="medium"
                             sx={{ paddingRight: 1 }}
                         />
-                        Matress
+                        Fashion
+                    </MenuItem>
+                    <MenuItem
+                        onClick={handleClose}
+                        sx={{
+                            color: "#495057",
+                            width: "18.5vw",
+                        }}
+                    >
+                        <TimeToLeaveIcon
+                            fontSize="medium"
+                            sx={{ paddingRight: 1 }}
+                        />
+                        Bedding
+                    </MenuItem>
+                    <MenuItem
+                        onClick={handleClose}
+                        sx={{
+                            color: "#495057",
+                            width: "18.5vw",
+                        }}
+                    >
+                        <TimeToLeaveIcon
+                            fontSize="medium"
+                            sx={{ paddingRight: 1 }}
+                        />
+                        Furnitures
+                    </MenuItem>
+                    <MenuItem
+                        onClick={handleClose}
+                        sx={{
+                            color: "#495057",
+                            width: "18.5vw",
+                        }}
+                    >
+                        <TimeToLeaveIcon
+                            fontSize="medium"
+                            sx={{ paddingRight: 1 }}
+                        />
+                        Books
+                    </MenuItem>
+                    <MenuItem
+                        onClick={handleClose}
+                        sx={{
+                            color: "#495057",
+                            width: "18.5vw",
+                        }}
+                    >
+                        <TimeToLeaveIcon
+                            fontSize="medium"
+                            sx={{ paddingRight: 1 }}
+                        />
+                        Sports
+                    </MenuItem>
+                    <MenuItem
+                        onClick={handleClose}
+                        sx={{
+                            color: "#495057",
+                            width: "18.5vw",
+                        }}
+                    >
+                        <TimeToLeaveIcon
+                            fontSize="medium"
+                            sx={{ paddingRight: 1 }}
+                        />
+                        Others
                     </MenuItem>
                 </Menu>
 
@@ -217,7 +302,13 @@ const NavBar = () => {
                     >
                         Pages
                     </Typography>
-                    <Button variant="contained" sx={{ borderRadius: 2 }}>
+                    <Button
+                        variant="contained"
+                        sx={{ borderRadius: 2 }}
+                        onClick={() => {
+                            navigate("/sell");
+                        }}
+                    >
                         <AddIcon fontSize="small" sx={{ paddingRight: 0 }} />
                         Sell
                     </Button>

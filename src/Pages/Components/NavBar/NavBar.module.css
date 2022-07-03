@@ -6,8 +6,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #f6fff8;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 .content1 {
     width: 84%;
@@ -28,6 +28,8 @@
 
 .Logo {
     font-family: "Proza Libre", sans-serif;
+    font-size: 2.5vh;
+    cursor: pointer;
 }
 .icons {
     width: 8%;

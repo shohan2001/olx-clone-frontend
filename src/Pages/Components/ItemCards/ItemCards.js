@@ -7,9 +7,13 @@ import {
     CardContent,
     autocompleteClasses,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const ItemCards = ({ cardDetails }) => {
-    console.log(cardDetails);
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate(`/itemPage/${cardDetails._id}`);
+    };
     return (
         <Card
             sx={{
@@ -19,6 +23,7 @@ const ItemCards = ({ cardDetails }) => {
                 backgroundColor: "#f6fff8",
                 borderRadius: 2,
             }}
+            onClick={handleClick}
         >
             <CardMedia
                 component="img"

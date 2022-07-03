@@ -1,0 +1,21 @@
+.content img {
+    width: 380px;
+    height: 400px;
+    margin: auto;
+}
+.arrowRight {
+    position: absolute;
+    right: 0.5%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    margin-left: 8px;
+}
+.arrowLeft {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 8px;
+    left: 0.5%;
+    z-index: 100;
+}
