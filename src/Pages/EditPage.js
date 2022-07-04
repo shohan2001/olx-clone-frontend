@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -8,20 +9,20 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
-import ReactFileReader from "react-file-reader";
-import ClearIcon from "@mui/icons-material/Clear";
-const Sell = () => {
+const Edit = () => {
     const navigate = useNavigate();
+    const itemID = useParams().id;
+    const [itemData, setItemData] = useState({});
 
     const [category, setCategory] = useState("");
     const [title, settitle] = useState("");
@@ -50,7 +51,7 @@ const Sell = () => {
         setLocation(event.target.value);
     };
 
-    const handleSubmit = () => {
+    const handleUpdate = () => {
         const data = {
             category,
             title,
@@ -60,26 +61,41 @@ const Sell = () => {
             location,
             images,
             title,
-            sellerID:
-                Math.random().toString(36).substring(2, 15) +
-                Math.random().toString(36).substring(2, 15),
+            sold: itemData.sold,
 
             postedDate: new Date(),
         };
 
         // how to make post request from local react front-end to node backend
 
-        fetch(`/api/product/sell`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+        fetch(`/api/product/update/${itemData._id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify(data),
         })
-            .then((Response) =>
-                Response.json().then((data) => navigate(`/itemPage/${data.id}`))
-            )
+            .then(navigate(`/itemPage/${itemData._id}`))
+
             .catch((err) => console.log(err));
     };
 
+    useEffect(() => {
+        const handleData = (data) => {
+            setItemData(data);
+            setCategory(data.category);
+            settitle(data.title);
+            setBrand(data.brand);
+            setDescription(data.description);
+            setPrice(data.price);
+            setLocation(data.location);
+            setimages(data.images);
+        };
+
+        fetch(`/api/product/${itemID}`).then((Response) =>
+            Response.json().then((data) => handleData(data))
+        );
+    }, [itemID]);
     return (
         <Box>
             <Box
@@ -114,7 +130,7 @@ const Sell = () => {
                     fontWeight={500}
                     textAlign="center"
                 >
-                    SELL{" "}
+                    Edit Ad{" "}
                 </Typography>
 
                 <Box>
@@ -186,6 +202,7 @@ const Sell = () => {
                                 id="Title"
                                 name="Title"
                                 label="Ad-Title"
+                                value={title}
                                 fullWidth
                                 // autoComplete="shipping address-line1"
                                 variant="standard"
@@ -199,6 +216,7 @@ const Sell = () => {
                                 id="Brand"
                                 name="Brand"
                                 label="Brand"
+                                value={brand}
                                 fullWidth
                                 // autoComplete="shipping address-line1"
                                 variant="standard"
@@ -212,6 +230,7 @@ const Sell = () => {
                                 id="Description"
                                 name="Description"
                                 label="Description"
+                                value={description}
                                 fullWidth
                                 // autoComplete="shipping address-line1"
                                 variant="standard"
@@ -228,72 +247,13 @@ const Sell = () => {
                                 fullWidth
                                 // autoComplete="shipping address-line1"
                                 variant="standard"
+                                value={price}
                                 onChange={handlePriceChange}
                             />
                         </Grid>
 
                         <Grid item xs={12}>
-                            <ReactFileReader
-                                base64={true}
-                                multipleFiles={true}
-                                handleFiles={(files) => {
-                                    setimages([...images, files.base64]);
-                                }}
-                            >
-                                <Button>Upload</Button>
-                            </ReactFileReader>{" "}
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                }}
-                            >
-                                {images.map((image, indexImage) => (
-                                    <Box sx={{ display: "flex", m: 0 }}>
-                                        <Card
-                                            sx={{
-                                                width: "80px",
-                                                height: "80px",
-                                                border: "2px solid black",
-                                                pointer: "none",
-                                                marginY: 1,
-                                                m: 1,
-                                            }}
-                                        >
-                                            <CardMedia
-                                                component="img"
-                                                height="194"
-                                                image={image}
-                                                alt="Paella dish"
-                                            />
-                                        </Card>
-                                        <ClearIcon
-                                            sx={{
-                                                p: 0,
-                                                m: 0,
-                                                border: "1px solid black",
-                                                borderRadius: "100%",
-                                                cursor: "pointer",
-                                                position: "relative",
-                                                left: "-8px",
-                                            }}
-                                            onClick={() => {
-                                                setimages(
-                                                    images.filter(
-                                                        (image, index) => {
-                                                            return (
-                                                                index !==
-                                                                indexImage
-                                                            );
-                                                        }
-                                                    )
-                                                );
-                                            }}
-                                        />
-                                    </Box>
-                                ))}
-                            </Box>
-                            {/* <TextField
+                            <TextField
                                 required
                                 id="images"
                                 name="images"
@@ -301,15 +261,11 @@ const Sell = () => {
                                 fullWidth
                                 // autoComplete="shipping address-line1"
                                 variant="standard"
+                                inputProps={{ type: "file" }}
                                 onChange={(e) => {
-                                    // convert image to base64
-                                    const reader = new FileReader();
-                                    reader.onload = (e) => {
-                                        setImages([...images, e.target.result]);
-                                    };
-                                    reader.readAsDataURL(e.target.files[0]);}}
-
-                            /> */}
+                                    setimages([...images, e.target.files]);
+                                }}
+                            />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
@@ -320,6 +276,7 @@ const Sell = () => {
                                 fullWidth
                                 // autoComplete="shipping address-line1"
                                 variant="standard"
+                                value={location}
                                 onChange={handleLocationChange}
                             />
                         </Grid>
@@ -328,16 +285,15 @@ const Sell = () => {
                         <Button
                             variant="contained"
                             sx={{ borderRadius: 2, m: 2 }}
-                            onClick={handleSubmit}
+                            onClick={handleUpdate}
                         >
-                            Post
+                            Update
                         </Button>
                     </Box>
                 </Box>
             </Box>
-            {console.log(images)}
         </Box>
     );
 };
 
-export default Sell;
+export default Edit;

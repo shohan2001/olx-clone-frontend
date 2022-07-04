@@ -13,15 +13,15 @@ import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import AddIcon from "@mui/icons-material/Add";
 
-const NavBar = () => {
+const NavBar = ({ categoryName }) => {
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);
     };
-    const handleClose = (e) => {
+    const handleClose = (event) => {
         setAnchorEl(null);
     };
 
@@ -41,7 +41,7 @@ const NavBar = () => {
                     <SearchBar />
                 </Container>
                 {!isLoggedIn ? (
-                    <div>Login</div>
+                    <Box>Login</Box>
                 ) : (
                     <div className={navStyles.icons}>
                         <Fab
@@ -89,12 +89,12 @@ const NavBar = () => {
                             alignItems: "center",
                             justifyContent: "space-between",
                             paddingLeft: 1,
-                            width: "6.8em",
+
                             color: "#495057",
                         }}
                     >
-                        <AppsIcon fontSize="inherit" />
-                        Categories{" "}
+                        <AppsIcon fontSize="inherit" sx={{ marginRight: 1 }} />
+                        {categoryName}{" "}
                     </Typography>
                     {openMenu ? (
                         <KeyboardArrowDownIcon fontSize="small" />
@@ -110,7 +110,12 @@ const NavBar = () => {
                     onClose={handleClose}
                 >
                     <MenuItem
-                        onClick={handleClose}
+                        value="Cars"
+                        onClick={(e) => {
+                            handleClose(e);
+                            navigate("/category/Cars");
+                            window.location.reload();
+                        }}
                         sx={{
                             color: "#495057",
                             width: "19vw",
@@ -123,7 +128,11 @@ const NavBar = () => {
                         Cars
                     </MenuItem>
                     <MenuItem
-                        onClick={handleClose}
+                        onClick={(e) => {
+                            handleClose(e);
+                            navigate("/category/Bikes");
+                            window.location.reload();
+                        }}
                         sx={{
                             color: "#495057",
                             width: "18.5vw",
@@ -136,10 +145,14 @@ const NavBar = () => {
                         Bikes/Scooters
                     </MenuItem>
                     <MenuItem
-                        onClick={handleClose}
                         sx={{
                             color: "#495057",
                             width: "18.5vw",
+                        }}
+                        onClick={(e) => {
+                            handleClose(e);
+                            navigate("/category/Cycle");
+                            window.location.reload();
                         }}
                     >
                         <PhoneAndroidIcon
@@ -149,7 +162,11 @@ const NavBar = () => {
                         Cycle
                     </MenuItem>
                     <MenuItem
-                        onClick={handleClose}
+                        onClick={(e) => {
+                            handleClose(e);
+                            navigate("/category/Phones");
+                            window.location.reload();
+                        }}
                         sx={{
                             color: "#495057",
                             width: "18.5vw",
@@ -162,7 +179,11 @@ const NavBar = () => {
                         Mobile phones
                     </MenuItem>
                     <MenuItem
-                        onClick={handleClose}
+                        onClick={(e) => {
+                            handleClose(e);
+                            navigate("/category/Laptops");
+                            window.location.reload();
+                        }}
                         sx={{
                             color: "#495057",
                             width: "18.5vw",
@@ -175,7 +196,11 @@ const NavBar = () => {
                         Laptop
                     </MenuItem>
                     <MenuItem
-                        onClick={handleClose}
+                        onClick={(e) => {
+                            handleClose(e);
+                            navigate("/category/Electronics");
+                            window.location.reload();
+                        }}
                         sx={{
                             color: "#495057",
                             width: "18.5vw",
@@ -188,7 +213,11 @@ const NavBar = () => {
                         Electronic Accessories
                     </MenuItem>
                     <MenuItem
-                        onClick={handleClose}
+                        onClick={(e) => {
+                            handleClose(e);
+                            navigate("/category/Fashion");
+                            window.location.reload();
+                        }}
                         sx={{
                             color: "#495057",
                             width: "18.5vw",
@@ -201,7 +230,11 @@ const NavBar = () => {
                         Fashion
                     </MenuItem>
                     <MenuItem
-                        onClick={handleClose}
+                        onClick={(e) => {
+                            handleClose(e);
+                            navigate("/category/Beddings");
+                            window.location.reload();
+                        }}
                         sx={{
                             color: "#495057",
                             width: "18.5vw",
@@ -214,7 +247,11 @@ const NavBar = () => {
                         Bedding
                     </MenuItem>
                     <MenuItem
-                        onClick={handleClose}
+                        onClick={(e) => {
+                            handleClose(e);
+                            navigate("/category/Furnitures");
+                            window.location.reload();
+                        }}
                         sx={{
                             color: "#495057",
                             width: "18.5vw",
@@ -227,7 +264,11 @@ const NavBar = () => {
                         Furnitures
                     </MenuItem>
                     <MenuItem
-                        onClick={handleClose}
+                        onClick={(e) => {
+                            handleClose(e);
+                            navigate("/category/Books");
+                            window.location.reload();
+                        }}
                         sx={{
                             color: "#495057",
                             width: "18.5vw",
@@ -240,7 +281,11 @@ const NavBar = () => {
                         Books
                     </MenuItem>
                     <MenuItem
-                        onClick={handleClose}
+                        onClick={(e) => {
+                            handleClose(e);
+                            navigate("/category/Sports");
+                            window.location.reload();
+                        }}
                         sx={{
                             color: "#495057",
                             width: "18.5vw",
@@ -253,7 +298,11 @@ const NavBar = () => {
                         Sports
                     </MenuItem>
                     <MenuItem
-                        onClick={handleClose}
+                        onClick={(e) => {
+                            handleClose(e);
+                            navigate("/category/Others");
+                            window.location.reload();
+                        }}
                         sx={{
                             color: "#495057",
                             width: "18.5vw",

@@ -17,7 +17,7 @@ const Home = () => {
 
     return (
         <div>
-            <NavBar />
+            <NavBar categoryName={"Categories"} />
 
             <Box sx={{ width: "84%", margin: "0 auto" }}>
                 <Typography variant="h4" sx={{ m: 3 }}>
