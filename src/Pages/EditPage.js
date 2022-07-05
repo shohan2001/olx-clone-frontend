@@ -93,8 +93,10 @@ const Edit = () => {
                 price,
                 location,
                 images,
-                title,
+
                 sold: itemData.sold,
+                sellerName,
+                sellerPhoneNumber,
 
                 postedDate: new Date(),
             };
@@ -152,8 +154,6 @@ const Edit = () => {
                     width: { lg: "34%", md: "44%", sm: "52%", xs: "80%" },
 
                     margin: "10px auto",
-                    boxShadow:
-                        "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
                     p: 3,
                     borderRadius: 5,
                     marginTop: 5,
@@ -387,9 +387,9 @@ const Edit = () => {
                         <Grid item xs={12}>
                             <TextField
                                 required
-                                id="Phone Number"
-                                name="Phone Number"
-                                label="Phone Number"
+                                id="Seller Name"
+                                name="Seller Name"
+                                label="Seller Name"
                                 fullWidth
                                 // autoComplete="shipping address-line1"
                                 variant="standard"

@@ -27,12 +27,14 @@ const MyAds = () => {
                 </Typography>
                 <Grid container>
                     {itemData.map((item) => {
-                        if (user._id == item.sellerID) {
+                        if (user._id === item.sellerID) {
                             return (
                                 <Grid item xs={12} lg={3} md={6} sm={6}>
                                     <ItemCards cardDetails={item} />
                                 </Grid>
                             );
+                        } else {
+                            return null;
                         }
                     })}
                 </Grid>

@@ -12,7 +12,7 @@ const CategoryPage = () => {
         fetch(`/api/product/category/${categoryName}`).then((Response) =>
             Response.json().then((data) => setItemData(data.data))
         );
-    }, []);
+    }, [categoryName]);
 
     return (
         <Box>

@@ -40,7 +40,7 @@ const SearchBar = () => {
     const buttonSubmit = () => {
         /*Submitting the searched movie*/
         let flag = false;
-        const searchItem = {};
+        let searchItem = {};
         for (let item of itemList) {
             if (inputData.toLowerCase() === item.title.toLowerCase()) {
                 searchItem = item;

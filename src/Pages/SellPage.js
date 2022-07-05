@@ -89,13 +89,14 @@ const Sell = () => {
                 price,
                 location,
                 images,
-                title,
+
                 sellerID: user._id,
                 sellerName,
-                phoneNumber: user.phoneNumber,
-
+                sellerPhoneNumber,
                 postedDate: new Date(),
+                sold: "false",
             };
+            console.log(data);
 
             // how to make post request from local react front-end to node backend
 
@@ -135,8 +136,6 @@ const Sell = () => {
                     width: { lg: "34%", md: "44%", sm: "52%", xs: "80%" },
 
                     margin: "10px auto",
-                    boxShadow:
-                        "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
                     p: 3,
                     borderRadius: 5,
                     marginTop: 5,
@@ -364,19 +363,20 @@ const Sell = () => {
                                 onChange={handleLocationChange}
                             />
                         </Grid>
+
                         <Grid item xs={12}>
                             <TextField
                                 required
-                                id="Phone Number"
-                                name="Phone Number"
-                                label="Phone Number"
+                                id="Seller Name"
+                                name="Seller Name"
+                                label="Seller Name"
                                 fullWidth
-                                // autoComplete="shipping address-line1"
                                 variant="standard"
                                 value={sellerName}
                                 onChange={handleNameChange}
                             />
                         </Grid>
+
                         <Grid item xs={12}>
                             <TextField
                                 required
@@ -413,7 +413,6 @@ const Sell = () => {
                     )}
                 </Box>
             </Box>
-            {console.log(images)}
         </Box>
     );
 };

@@ -1,12 +1,5 @@
 import { Box } from "@mui/system";
-import {
-    Typography,
-    Card,
-    CardActions,
-    CardMedia,
-    CardContent,
-    autocompleteClasses,
-} from "@mui/material";
+import { Card, CardMedia, CardContent } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const ItemCards = ({ cardDetails }) => {

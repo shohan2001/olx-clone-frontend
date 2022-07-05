@@ -18,7 +18,7 @@ import { useContext } from "react";
 
 const NavBar = ({ categoryName }) => {
     const navigate = useNavigate();
-    const { isLoggedIn, user } = useContext(AuthContext);
+    const { isLoggedIn } = useContext(AuthContext);
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
 
@@ -28,7 +28,7 @@ const NavBar = ({ categoryName }) => {
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);
     };
-    const handleClose = (event) => {
+    const handleClose = () => {
         setAnchorEl(null);
     };
 
@@ -188,7 +188,7 @@ const NavBar = ({ categoryName }) => {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
-                        width: "19vw",
+
                         backgroundColor: "secondary.main",
                         borderRadius: "7px",
                         paddingRight: 1,

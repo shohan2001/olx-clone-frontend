@@ -10,7 +10,7 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import Button from "@mui/material/Button";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
-import { SettingsInputSvideoRounded } from "@material-ui/icons";
+
 const Profile = () => {
     const navigate = useNavigate();
     const { user, setUser } = useContext(AuthContext);
@@ -35,8 +35,7 @@ const Profile = () => {
                     width: { lg: "34%", md: "44%", sm: "52%", xs: "80%" },
 
                     margin: "10px auto",
-                    boxShadow:
-                        "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+
                     p: 3,
                     borderRadius: 5,
                     marginTop: 5,
@@ -89,8 +88,7 @@ const Profile = () => {
                     width: { lg: "34%", md: "44%", sm: "52%", xs: "80%" },
 
                     margin: "10px auto",
-                    boxShadow:
-                        "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+
                     p: 3,
                     borderRadius: 5,
                     marginTop: 5,
