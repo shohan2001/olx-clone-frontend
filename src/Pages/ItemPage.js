@@ -38,10 +38,14 @@ const ItemPage = () => {
             setIsSold(data.sold);
             setImageData(data.images);
         };
-
-        fetch(
-            `https://olx-clone-iitg.herokuapp.com/api/product/${itemID}`
-        ).then((Response) => Response.json().then((data) => handleData(data)));
+        const apiCallHere = () => {
+            fetch(
+                `https://olx-clone-iitg.herokuapp.com/api/product/${itemID}`
+            ).then((Response) =>
+                Response.json().then((data) => handleData(data))
+            );
+        };
+        apiCallHere();
     }, [itemID]);
 
     const SampleNextArrow = ({ onClick }) => {
