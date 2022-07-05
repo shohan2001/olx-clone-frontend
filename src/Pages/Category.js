@@ -10,7 +10,7 @@ const CategoryPage = () => {
 
     useEffect(() => {
         fetch(
-            `https://olx-clone-iitg.herokuapp.com//api/product/category/${categoryName}`
+            `https://olx-clone-iitg.herokuapp.com/api/product/category/${categoryName}`
         ).then((Response) =>
             Response.json().then((data) => setItemData(data.data))
         );
