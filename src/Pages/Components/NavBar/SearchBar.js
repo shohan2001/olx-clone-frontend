@@ -1,6 +1,6 @@
 import SearchIcon from "@mui/icons-material/Search";
 import searchStyles from "./SearchBar.module.css";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 

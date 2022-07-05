@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+
 import { Box } from "@mui/system";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -11,14 +10,14 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useNavigate } from "react-router-dom";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import Stack from "@mui/material/Stack";
+
 import Button from "@mui/material/Button";
 import { useParams } from "react-router-dom";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
+
 import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
+import { AuthContext } from "../Context/AuthContext";
+import { useContext } from "react";
 import ReactFileReader from "react-file-reader";
 import ClearIcon from "@mui/icons-material/Clear";
 const Edit = () => {
@@ -34,6 +33,12 @@ const Edit = () => {
     const [price, setPrice] = useState(0);
     const [location, setLocation] = useState("");
     const [images, setimages] = useState([]);
+    const { user } = useContext(AuthContext);
+
+    const [sellerPhoneNumber, setSellerPhoneNumber] = useState(
+        user.phoneNumber
+    );
+    const [sellerName, setSellerName] = useState(user.name);
 
     const handleChange = (event) => {
         setIsInvalid(false);
@@ -58,6 +63,14 @@ const Edit = () => {
     const handleLocationChange = (event) => {
         setIsInvalid(false);
         setLocation(event.target.value);
+    };
+    const handlePhoneChange = (event) => {
+        setIsInvalid(false);
+        setSellerPhoneNumber(event.target.value);
+    };
+    const handleNameChange = (event) => {
+        setIsInvalid(false);
+        setSellerName(event.target.value);
     };
 
     const handleUpdate = () => {
@@ -369,6 +382,32 @@ const Edit = () => {
                                 variant="standard"
                                 value={location}
                                 onChange={handleLocationChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                id="Phone Number"
+                                name="Phone Number"
+                                label="Phone Number"
+                                fullWidth
+                                // autoComplete="shipping address-line1"
+                                variant="standard"
+                                value={sellerName}
+                                onChange={handleNameChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                id="Phone Number"
+                                name="Phone Number"
+                                label="Phone Number"
+                                fullWidth
+                                // autoComplete="shipping address-line1"
+                                variant="standard"
+                                value={sellerPhoneNumber}
+                                onChange={handlePhoneChange}
                             />
                         </Grid>
                     </Grid>

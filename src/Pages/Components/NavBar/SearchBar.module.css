@@ -62,7 +62,7 @@
     align-items: center;
 }
 .category {
-    width: 190px;
+    width: 22%;
     padding: 0;
     margin: 0;
     color: #495057;
@@ -79,22 +79,13 @@
 
 /* add media query */
 @media (max-width: 500px) {
-    .searchBody {
-        width: 200px;
-    }
-    .completeBar {
-        width: 10rem;
-    }
-    .bar {
-        width: 2rem;
-    }
     .searching {
-        width: 4rem;
+        width: 100%;
     }
     .searchButton {
-        width: 5rem;
+        width: 30%;
     }
-    .category {
-        width: 2rem;
+    .completeBar {
+        width: 300px;
     }
 }

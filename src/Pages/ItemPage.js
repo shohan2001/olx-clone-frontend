@@ -5,7 +5,7 @@ import { Box } from "@mui/system";
 import Slider from "react-slick";
 import slideStyle from "./itemStyles.module.css";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { deepOrange, deepPurple } from "@mui/material/colors";
+import { deepOrange } from "@mui/material/colors";
 import {
     Typography,
     Grid,
@@ -23,10 +23,13 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useNavigate } from "react-router-dom";
-
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 const ItemPage = () => {
     const navigate = useNavigate();
     const itemID = useParams().id;
+
+    const { isLoggedIn, user } = useContext(AuthContext);
 
     const [itemData, setItemData] = useState({});
     const [imageData, setImageData] = useState([]);
@@ -245,7 +248,6 @@ const ItemPage = () => {
                                     >
                                         Seller Description
                                     </Typography>
-
                                     <CardHeader
                                         avatar={
                                             <Avatar
@@ -253,7 +255,11 @@ const ItemPage = () => {
                                                     bgcolor: deepOrange[500],
                                                 }}
                                             >
-                                                S
+                                                {itemData.sellerName
+                                                    ? itemData.sellerName.charAt(
+                                                          0
+                                                      )
+                                                    : "X"}
                                             </Avatar>
                                         }
                                         action={
@@ -261,72 +267,92 @@ const ItemPage = () => {
                                                 <MoreVertIcon />
                                             </IconButton>
                                         }
-                                        title="Mr Money"
-                                        subheader="July 06, 2022"
+                                        title={itemData.sellerName}
+                                        // make date beutiful
+                                        subheader={new Date(
+                                            itemData.postedDate
+                                        ).toLocaleDateString("en-US", {
+                                            month: "short",
+                                            day: "numeric",
+                                            year: "numeric",
+                                        })}
                                     />
 
-                                    <Box
-                                        sx={{
-                                            border: "2px solid black",
-                                            p: 1,
-                                            borderRadius: 1,
-                                            textAlign: "center",
-                                            m: 1,
-                                            cursor: "pointer",
-                                        }}
-                                        backgroundColor={
-                                            isSold ? "primary.main" : "#fff"
-                                        }
-                                        onClick={() => {
-                                            if (isSold) {
-                                                setIsSold(false);
-                                            } else {
-                                                setIsSold(true);
-                                            }
-                                            itemData.sold = itemData.sold
-                                                ? false
-                                                : true;
-
-                                            fetch(
-                                                `/api/product/update/${itemData._id}`,
-                                                {
-                                                    method: "PUT",
-                                                    headers: {
-                                                        "Content-Type":
-                                                            "application/json",
-                                                    },
-                                                    body: JSON.stringify(
-                                                        itemData
-                                                    ),
+                                    {isLoggedIn &&
+                                    (user._id === itemData.sellerID ||
+                                        user.isAdmin) ? (
+                                        <Box>
+                                            <Box
+                                                sx={{
+                                                    border: "2px solid black",
+                                                    p: 1,
+                                                    borderRadius: 1,
+                                                    textAlign: "center",
+                                                    m: 1,
+                                                    cursor: "pointer",
+                                                }}
+                                                backgroundColor={
+                                                    isSold
+                                                        ? "primary.main"
+                                                        : "#fff"
                                                 }
-                                            )
-                                                .then((Response) =>
-                                                    console.log(Response)
-                                                )
-                                                .catch((err) =>
-                                                    console.log(err)
-                                                );
-                                        }}
-                                    >
-                                        {!isSold
-                                            ? "Mark as sold"
-                                            : "Mark as not sold"}
-                                    </Box>
-                                    <Box
-                                        sx={{
-                                            border: "2px solid black",
-                                            p: 1,
-                                            borderRadius: 1,
-                                            textAlign: "center",
-                                            m: 1,
-                                            cursor: "pointer",
-                                        }}
-                                        onClick={() => {
-                                            navigate(`/edit/${itemData._id}`);
-                                        }}
-                                    >
-                                        Edit Ad
-                                    </Box>
+                                                onClick={() => {
+                                                    if (isSold) {
+                                                        setIsSold(false);
+                                                    } else {
+                                                        setIsSold(true);
+                                                    }
+                                                    itemData.sold =
+                                                        itemData.sold
+                                                            ? false
+                                                            : true;
+
+                                                    fetch(
+                                                        `/api/product/update/${itemData._id}`,
+                                                        {
+                                                            method: "PUT",
+                                                            headers: {
+                                                                "Content-Type":
+                                                                    "application/json",
+                                                            },
+                                                            body: JSON.stringify(
+                                                                itemData
+                                                            ),
+                                                        }
+                                                    )
+                                                        .then((Response) =>
+                                                            console.log(
+                                                                Response
+                                                            )
+                                                        )
+                                                        .catch((err) =>
+                                                            console.log(err)
+                                                        );
+                                                }}
+                                            >
+                                                {!isSold
+                                                    ? "Mark as sold"
+                                                    : "Mark as not sold"}
+                                            </Box>
+                                            <Box
+                                                sx={{
+                                                    border: "2px solid black",
+                                                    p: 1,
+                                                    borderRadius: 1,
+                                                    textAlign: "center",
+                                                    m: 1,
+                                                    cursor: "pointer",
+                                                }}
+                                                onClick={() => {
+                                                    navigate(
+                                                        `/edit/${itemData._id}`
+                                                    );
+                                                }}
+                                            >
+                                                Edit Ad
+                                            </Box>
+                                        </Box>
+                                    ) : null}
                                 </CardContent>
                             </Card>
                         </Box>

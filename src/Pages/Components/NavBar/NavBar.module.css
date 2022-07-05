@@ -30,17 +30,35 @@
     font-family: "Proza Libre", sans-serif;
     font-size: 2.5vh;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
-.icons {
+.icons1 {
     width: 8%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+.icons2 {
+    display: none;
+}
 
 @media (max-width: 580px) {
     .Logo {
         font-size: 2vh;
+        width: 300px;
+        justify-content: space-between;
+        display: "flex";
+        align-items: center;
+    }
+    .content1 {
+        flex-direction: column;
+    }
+    .icons1 {
+        display: none;
+    }
+    .icons2 {
+        display: block;
     }
 }
 /* .category {

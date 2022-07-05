@@ -1,29 +1,19 @@
-import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+
 import { Box } from "@mui/system";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+
 import { useNavigate } from "react-router-dom";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import { useParams } from "react-router-dom";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import ReactFileReader from "react-file-reader";
-import ClearIcon from "@mui/icons-material/Clear";
 
-const Sell = () => {
+import Button from "@mui/material/Button";
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import { SettingsInputSvideoRounded } from "@material-ui/icons";
+const Profile = () => {
     const navigate = useNavigate();
+    const { user, setUser } = useContext(AuthContext);
 
     return (
         <Box>
@@ -65,28 +55,23 @@ const Sell = () => {
                 </Typography>
 
                 <Box>
-                    <Typography
-                        variant="h6"
-                        gutterBottom
-                        sx={{ marginBottom: 2 }}
-                    ></Typography>
+                    <TextField
+                        required
+                        id="Email"
+                        name="Email"
+                        label="Email"
+                        fullWidth
+                        variant="standard"
+                        value={user.email}
+                    />
 
                     {/* <Grid container spacing={3}></Grid>
           <Grid item xs={12} sm={12}></Grid> */}
 
-                    <Grid item xs={12}>
-                        <TextField
-                            required
-                            id="email"
-                            name="email"
-                            label="email"
-                            fullWidth
-                            // autoComplete="shipping address-line1"
-                            variant="standard"
-                        />
-                    </Grid>
+                    <Grid item xs={12}></Grid>
                 </Box>
             </Box>
+            {console.log(user)}
 
             <Box
                 sx={{
@@ -119,6 +104,7 @@ const Sell = () => {
                     component="div"
                     fontWeight={100}
                     textAlign="left"
+                    // take the first name
                 >
                     Profile
                 </Typography>
@@ -142,6 +128,7 @@ const Sell = () => {
                                 fullWidth
                                 autoComplete="given-name"
                                 variant="standard"
+                                value={user.name.split(" ")[0]}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -153,6 +140,7 @@ const Sell = () => {
                                 fullWidth
                                 autoComplete="family-name"
                                 variant="standard"
+                                value={user.name.split(" ")[1]}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -163,6 +151,13 @@ const Sell = () => {
                                 label="Phone Number"
                                 fullWidth
                                 variant="standard"
+                                value={user.phoneNumber}
+                                onChange={(e) => {
+                                    setUser({
+                                        ...user,
+                                        phoneNumber: e.target.value,
+                                    });
+                                }}
                             />
                         </Grid>
                     </Grid>
@@ -170,6 +165,17 @@ const Sell = () => {
                         <Button
                             variant="contained"
                             sx={{ borderRadius: 2, marginTop: 4 }}
+                            onClick={() => {
+                                fetch("/user/update", {
+                                    method: "PUT",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify(user),
+                                })
+                                    .then((res) => navigate("/"))
+                                    .catch((err) => console.log(err));
+                            }}
                         >
                             Update Profile
                         </Button>
@@ -180,4 +186,4 @@ const Sell = () => {
     );
 };
 
-export default Sell;
+export default Profile;

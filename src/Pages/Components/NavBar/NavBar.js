@@ -3,21 +3,28 @@ import navStyles from "./NavBar.module.css";
 import SearchBar from "./SearchBar";
 import { Container } from "@mui/system";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Fab, Typography, Box, Button, Menu, MenuItem } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import AppsIcon from "@mui/icons-material/Apps";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TimeToLeaveIcon from "@mui/icons-material/TimeToLeave";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import AddIcon from "@mui/icons-material/Add";
 
+// context import
+import { AuthContext } from "../../../Context/AuthContext";
+import { useContext } from "react";
+
 const NavBar = ({ categoryName }) => {
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const { isLoggedIn, user } = useContext(AuthContext);
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
+
+    const [anchorEl2, setAnchorEl2] = useState(null);
+    const openMenu2 = Boolean(anchorEl2);
+
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);
     };
@@ -25,33 +32,149 @@ const NavBar = ({ categoryName }) => {
         setAnchorEl(null);
     };
 
+    const handleClick2 = (e) => {
+        setAnchorEl2(e.currentTarget);
+    };
+    const handleClose2 = (event) => {
+        setAnchorEl2(null);
+    };
+
     return (
         <div className={navStyles.navBody}>
             <div className={navStyles.content1}>
-                <div
-                    className={navStyles.Logo}
-                    onClick={() => {
-                        navigate("/");
-                    }}
-                >
-                    {" "}
-                    <h2>Olx IITG</h2>
-                </div>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <div
+                        className={navStyles.Logo}
+                        onClick={() => {
+                            navigate("/");
+                        }}
+                    >
+                        {" "}
+                        <div>
+                            <h2>Olx IITG</h2>
+                        </div>
+                        <div>
+                            {isLoggedIn ? (
+                                <div className={navStyles.icons2}>
+                                    <Fab
+                                        aria-label="like"
+                                        size="small"
+                                        color="secondary"
+                                        sx={{ boxShadow: "none" }}
+                                        aria-controls="user-menu"
+                                        aria-haspopup="true"
+                                        aria-expanded={
+                                            openMenu2 ? "true" : undefined
+                                        }
+                                        onClick={handleClick2}
+                                    >
+                                        <PersonOutlineIcon />
+                                    </Fab>
+                                </div>
+                            ) : (
+                                <Box
+                                    onClick={() => {
+                                        window.open(
+                                            "http://localhost:5000/auth/outlook",
+                                            "_self"
+                                        );
+                                    }}
+                                    sx={{
+                                        cursor: "pointer",
+                                        display: {
+                                            lg: "none",
+                                            md: "none",
+                                            sm: "none",
+                                            xs: "block",
+                                        },
+                                    }}
+                                >
+                                    Login
+                                </Box>
+                            )}
+                        </div>
+                    </div>
+                </Box>
                 <Container sx={{ width: "56%", fontSize: "0.85rem" }}>
                     <SearchBar />
                 </Container>
+
                 {!isLoggedIn ? (
-                    <Box>Login</Box>
+                    <Box
+                        onClick={() => {
+                            window.open(
+                                "http://localhost:5000/auth/outlook",
+                                "_self"
+                            );
+                        }}
+                        sx={{
+                            cursor: "pointer",
+                            display: {
+                                lg: "block",
+                                md: "block",
+                                sm: "block",
+                                xs: "none",
+                            },
+                        }}
+                    >
+                        Login
+                    </Box>
                 ) : (
-                    <div className={navStyles.icons}>
+                    <div className={navStyles.icons1}>
                         <Fab
                             aria-label="like"
                             size="small"
                             color="secondary"
                             sx={{ boxShadow: "none" }}
+                            aria-controls="user-menu"
+                            aria-haspopup="true"
+                            aria-expanded={openMenu2 ? "true" : undefined}
+                            onClick={handleClick2}
                         >
                             <PersonOutlineIcon />
                         </Fab>
+                        <Menu
+                            id="user-menu"
+                            anchorEl={anchorEl2}
+                            open={openMenu2}
+                            onClose={handleClose2}
+                        >
+                            <MenuItem
+                                onClick={() => {
+                                    navigate("/profile");
+                                }}
+                            >
+                                Profile
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    navigate("/myAds");
+                                }}
+                            >
+                                My Ads
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    window.open(
+                                        "http://localhost:5000/auth/logout",
+                                        "_self"
+                                    );
+                                }}
+                            >
+                                Logout
+                            </MenuItem>
+                        </Menu>
+
+                        {/* <Button
+                            onClick={() => {
+                                window.open(
+                                    "http://localhost:5000/auth/logout",
+                                    "_self"
+                                );
+                            }}
+                        >
+                            Logout
+                        </Button> */}
                     </div>
                 )}
             </div>
@@ -69,7 +192,7 @@ const NavBar = ({ categoryName }) => {
                         backgroundColor: "secondary.main",
                         borderRadius: "7px",
                         paddingRight: 1,
-                        width: { sm: "50%", xs: "50%" },
+                        width: { lg: "23.5%", md: "30%", sm: "50%", xs: "50%" },
                     }}
                     aria-controls="category-menu"
                     aria-haspopup="true"
@@ -111,7 +234,7 @@ const NavBar = ({ categoryName }) => {
                         }}
                         sx={{
                             color: "#495057",
-                            width: "19vw",
+                            width: { lg: "19vw", xs: "40vw%" },
                         }}
                     >
                         <TimeToLeaveIcon
@@ -128,7 +251,7 @@ const NavBar = ({ categoryName }) => {
                         }}
                         sx={{
                             color: "#495057",
-                            width: "18.5vw",
+                            width: { lg: "19vw", xs: "40vw%" },
                         }}
                     >
                         <TimeToLeaveIcon
@@ -140,7 +263,7 @@ const NavBar = ({ categoryName }) => {
                     <MenuItem
                         sx={{
                             color: "#495057",
-                            width: "18.5vw",
+                            width: { lg: "19vw", xs: "40vw%" },
                         }}
                         onClick={(e) => {
                             handleClose(e);
@@ -162,7 +285,7 @@ const NavBar = ({ categoryName }) => {
                         }}
                         sx={{
                             color: "#495057",
-                            width: "18.5vw",
+                            width: { lg: "19vw", xs: "40vw%" },
                         }}
                     >
                         <PhoneAndroidIcon
@@ -179,7 +302,7 @@ const NavBar = ({ categoryName }) => {
                         }}
                         sx={{
                             color: "#495057",
-                            width: "18.5vw",
+                            width: { lg: "19vw", xs: "40vw%" },
                         }}
                     >
                         <TimeToLeaveIcon
@@ -196,7 +319,7 @@ const NavBar = ({ categoryName }) => {
                         }}
                         sx={{
                             color: "#495057",
-                            width: "18.5vw",
+                            width: { lg: "19vw", xs: "40vw%" },
                         }}
                     >
                         <TimeToLeaveIcon
@@ -213,7 +336,7 @@ const NavBar = ({ categoryName }) => {
                         }}
                         sx={{
                             color: "#495057",
-                            width: "18.5vw",
+                            width: { lg: "19vw", xs: "40vw%" },
                         }}
                     >
                         <TimeToLeaveIcon
@@ -230,7 +353,7 @@ const NavBar = ({ categoryName }) => {
                         }}
                         sx={{
                             color: "#495057",
-                            width: "18.5vw",
+                            width: { lg: "19vw", xs: "40vw%" },
                         }}
                     >
                         <TimeToLeaveIcon
@@ -317,7 +440,7 @@ const NavBar = ({ categoryName }) => {
                         alignItems: "center",
                     }}
                 >
-                    <Typography
+                    {/* <Typography
                         sx={{
                             fontSize: "0.9rem",
                             fontWeight: 300,
@@ -330,7 +453,7 @@ const NavBar = ({ categoryName }) => {
                         }}
                     >
                         User Account
-                    </Typography>
+                    </Typography> */}
 
                     <Button
                         variant="contained"

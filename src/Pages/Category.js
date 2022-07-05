@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import NavBar from "./Components/NavBar/NavBar";
 import { useEffect, useState } from "react";
 import ItemCards from "./Components/ItemCards/ItemCards";
-import { Typography, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useParams } from "react-router-dom";
 const CategoryPage = () => {
     const categoryName = useParams().id;
