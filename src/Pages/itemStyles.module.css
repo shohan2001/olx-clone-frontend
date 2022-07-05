@@ -19,3 +19,9 @@
     left: 0.5%;
     z-index: 100;
 }
+@media (max-width: 580px) {
+    .content img {
+        width: 280px;
+        height: 300px;
+    }
+}

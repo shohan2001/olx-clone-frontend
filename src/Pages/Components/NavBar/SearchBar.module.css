@@ -76,3 +76,25 @@
     border-left: 0.001px solid #adb5bd;
     cursor: pointer;
 }
+
+/* add media query */
+@media (max-width: 500px) {
+    .searchBody {
+        width: 200px;
+    }
+    .completeBar {
+        width: 10rem;
+    }
+    .bar {
+        width: 2rem;
+    }
+    .searching {
+        width: 4rem;
+    }
+    .searchButton {
+        width: 5rem;
+    }
+    .category {
+        width: 2rem;
+    }
+}

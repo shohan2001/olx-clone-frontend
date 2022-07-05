@@ -127,10 +127,21 @@ const ItemPage = () => {
                         >
                             <Card
                                 sx={{
-                                    width: 400,
+                                    width: {
+                                        lg: 400,
+                                        md: 300,
+                                        sm: "80%",
+                                        xs: 350,
+                                    },
                                     border: "0.1px solid #D3D3D3",
                                     pointer: "none",
                                     marginBottom: 1,
+                                    marginTop: {
+                                        lg: 0,
+                                        md: 0,
+                                        sm: 3,
+                                        xs: 4,
+                                    },
                                 }}
                             >
                                 <CardContent>
@@ -214,7 +225,12 @@ const ItemPage = () => {
 
                             <Card
                                 sx={{
-                                    width: 400,
+                                    width: {
+                                        lg: 400,
+                                        md: 300,
+                                        sm: "80%",
+                                        xs: 350,
+                                    },
                                     border: "0.1px solid #D3D3D3",
                                     pointer: "none",
                                     marginY: 1,
@@ -320,8 +336,13 @@ const ItemPage = () => {
                 <Box
                     sx={{
                         backgroundColor: "#fff",
-                        width: "58.5%",
-                        marginTop: 3,
+                        width: {
+                            lg: "58.6%",
+                            md: "80%",
+                            sm: "100%",
+                            xs: "100%",
+                        },
+                        marginTop: 2,
                         border: "0.1px solid #D3D3D3",
                         boxShadow:
                             "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
@@ -362,7 +383,12 @@ const ItemPage = () => {
                 <Box
                     sx={{
                         backgroundColor: "#fff",
-                        width: "58.5%",
+                        width: {
+                            lg: "58.6%",
+                            md: "80%",
+                            sm: "100%",
+                            xs: "100%",
+                        },
 
                         border: "0.1px solid #D3D3D3",
                         boxShadow:

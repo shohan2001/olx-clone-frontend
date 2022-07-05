@@ -15,7 +15,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 const NavBar = ({ categoryName }) => {
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
     const openMenu = Boolean(anchorEl);
     const handleClick = (e) => {
@@ -52,14 +52,6 @@ const NavBar = ({ categoryName }) => {
                         >
                             <PersonOutlineIcon />
                         </Fab>
-                        <Fab
-                            aria-label="like"
-                            size="small"
-                            color="secondary"
-                            sx={{ boxShadow: "none" }}
-                        >
-                            <ShoppingCartIcon />
-                        </Fab>
                     </div>
                 )}
             </div>
@@ -77,6 +69,7 @@ const NavBar = ({ categoryName }) => {
                         backgroundColor: "secondary.main",
                         borderRadius: "7px",
                         paddingRight: 1,
+                        width: { sm: "50%", xs: "50%" },
                     }}
                     aria-controls="category-menu"
                     aria-haspopup="true"
@@ -329,28 +322,16 @@ const NavBar = ({ categoryName }) => {
                             fontSize: "0.9rem",
                             fontWeight: 300,
                             cursor: "pointer",
+
+                            textDecoration: "none",
                         }}
-                    >
-                        Home
-                    </Typography>
-                    <Typography
-                        sx={{
-                            fontSize: "0.9rem",
-                            fontWeight: 300,
-                            cursor: "pointer",
+                        onClick={(e) => {
+                            navigate("/userPage");
                         }}
                     >
                         User Account
                     </Typography>
-                    <Typography
-                        sx={{
-                            fontSize: "0.9rem",
-                            fontWeight: 300,
-                            cursor: "pointer",
-                        }}
-                    >
-                        Pages
-                    </Typography>
+
                     <Button
                         variant="contained"
                         sx={{ borderRadius: 2 }}

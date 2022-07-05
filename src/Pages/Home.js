@@ -27,7 +27,7 @@ const Home = () => {
                     {/*Grid */}
                     <Grid container>
                         {itemData.map((item) => (
-                            <Grid item xs={12} lg={3} md={4} sm={6}>
+                            <Grid item xs={12} lg={3} md={6} sm={6}>
                                 <ItemCards cardDetails={item} />
                             </Grid>
                         ))}
