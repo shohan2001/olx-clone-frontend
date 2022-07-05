@@ -22,7 +22,7 @@ import ReactFileReader from "react-file-reader";
 import ClearIcon from "@mui/icons-material/Clear";
 const Sell = () => {
     const navigate = useNavigate();
-
+    const [isInvalid, setIsInvalid] = useState(false);
     const [category, setCategory] = useState("");
     const [title, settitle] = useState("");
     const [brand, setBrand] = useState("");
@@ -32,52 +32,73 @@ const Sell = () => {
     const [images, setimages] = useState([]);
 
     const handleChange = (event) => {
+        setIsInvalid(false);
         setCategory(event.target.value);
     };
     const handleTitleChange = (event) => {
+        setIsInvalid(false);
         settitle(event.target.value);
     };
     const handleBrandChange = (event) => {
+        setIsInvalid(false);
         setBrand(event.target.value);
     };
     const handleDescriptionChange = (event) => {
+        setIsInvalid(false);
         setDescription(event.target.value);
     };
     const handlePriceChange = (event) => {
+        setIsInvalid(false);
         setPrice(event.target.value);
     };
     const handleLocationChange = (event) => {
+        setIsInvalid(false);
         setLocation(event.target.value);
     };
 
     const handleSubmit = () => {
-        const data = {
-            category,
-            title,
-            brand,
-            description,
-            price,
-            location,
-            images,
-            title,
-            sellerID:
-                Math.random().toString(36).substring(2, 15) +
-                Math.random().toString(36).substring(2, 15),
+        if (
+            title.length > 0 &&
+            description.length > 0 &&
+            price > 0 &&
+            category.length > 0
+        ) {
+            if (isNaN(price)) {
+                setIsInvalid(true);
+                return;
+            }
+            const data = {
+                category,
+                title,
+                brand,
+                description,
+                price,
+                location,
+                images,
+                title,
+                sellerID:
+                    Math.random().toString(36).substring(2, 15) +
+                    Math.random().toString(36).substring(2, 15),
 
-            postedDate: new Date(),
-        };
+                postedDate: new Date(),
+            };
 
-        // how to make post request from local react front-end to node backend
+            // how to make post request from local react front-end to node backend
 
-        fetch(`/api/product/sell`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-        })
-            .then((Response) =>
-                Response.json().then((data) => navigate(`/itemPage/${data.id}`))
-            )
-            .catch((err) => console.log(err));
+            fetch(`/api/product/sell`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            })
+                .then((Response) =>
+                    Response.json().then((data) =>
+                        navigate(`/itemPage/${data.id}`)
+                    )
+                )
+                .catch((err) => console.log(err));
+        } else {
+            setIsInvalid(true);
+        }
     };
 
     return (
@@ -105,7 +126,10 @@ const Sell = () => {
                     p: 3,
                     borderRadius: 1,
                     marginTop: 5,
+                    backgroundColor: "white",
+                    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
                 }}
+                style={isInvalid ? { border: "1px solid red" } : {}}
             >
                 <Typography
                     gutterBottom
@@ -200,7 +224,6 @@ const Sell = () => {
                                 name="Brand"
                                 label="Brand"
                                 fullWidth
-                                // autoComplete="shipping address-line1"
                                 variant="standard"
                                 onChange={handleBrandChange}
                             />
@@ -213,7 +236,6 @@ const Sell = () => {
                                 name="Description"
                                 label="Description"
                                 fullWidth
-                                // autoComplete="shipping address-line1"
                                 variant="standard"
                                 onChange={handleDescriptionChange}
                             />
@@ -233,15 +255,20 @@ const Sell = () => {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <ReactFileReader
-                                base64={true}
-                                multipleFiles={true}
-                                handleFiles={(files) => {
-                                    setimages([...images, files.base64]);
-                                }}
-                            >
-                                <Button>Upload</Button>
-                            </ReactFileReader>{" "}
+                            <Box sx={{ display: "flex", alignItems: "center" }}>
+                                <Typography color="text.secondary">
+                                    Images
+                                </Typography>
+                                <ReactFileReader
+                                    base64={true}
+                                    multipleFiles={true}
+                                    handleFiles={(files) => {
+                                        setimages([...images, files.base64]);
+                                    }}
+                                >
+                                    <Button>Upload</Button>
+                                </ReactFileReader>
+                            </Box>
                             <Box
                                 sx={{
                                     display: "flex",
@@ -333,6 +360,17 @@ const Sell = () => {
                             Post
                         </Button>
                     </Box>
+                    {isInvalid ? (
+                        <Typography
+                            color="primary.main"
+                            variant="h7"
+                            sx={{ textAlign: "center" }}
+                        >
+                            Please fill all the fields
+                        </Typography>
+                    ) : (
+                        <Box />
+                    )}
                 </Box>
             </Box>
             {console.log(images)}

@@ -19,10 +19,13 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
+import ReactFileReader from "react-file-reader";
+import ClearIcon from "@mui/icons-material/Clear";
 const Edit = () => {
     const navigate = useNavigate();
     const itemID = useParams().id;
     const [itemData, setItemData] = useState({});
+    const [isInvalid, setIsInvalid] = useState(false);
 
     const [category, setCategory] = useState("");
     const [title, settitle] = useState("");
@@ -33,51 +36,71 @@ const Edit = () => {
     const [images, setimages] = useState([]);
 
     const handleChange = (event) => {
+        setIsInvalid(false);
         setCategory(event.target.value);
     };
     const handleTitleChange = (event) => {
+        setIsInvalid(false);
         settitle(event.target.value);
     };
     const handleBrandChange = (event) => {
+        setIsInvalid(false);
         setBrand(event.target.value);
     };
     const handleDescriptionChange = (event) => {
+        setIsInvalid(false);
         setDescription(event.target.value);
     };
     const handlePriceChange = (event) => {
+        setIsInvalid(false);
         setPrice(event.target.value);
     };
     const handleLocationChange = (event) => {
+        setIsInvalid(false);
         setLocation(event.target.value);
     };
 
     const handleUpdate = () => {
-        const data = {
-            category,
-            title,
-            brand,
-            description,
-            price,
-            location,
-            images,
-            title,
-            sold: itemData.sold,
+        if (
+            title.length > 0 &&
+            description.length > 0 &&
+            price > 0 &&
+            category.length > 0
+        ) {
+            // check if price is valid number or not
+            if (isNaN(price)) {
+                setIsInvalid(true);
+                return;
+            }
+            const data = {
+                category,
+                title,
+                brand,
+                description,
+                price,
+                location,
+                images,
+                title,
+                sold: itemData.sold,
 
-            postedDate: new Date(),
-        };
+                postedDate: new Date(),
+            };
 
-        // how to make post request from local react front-end to node backend
+            // how to make post request from local react front-end to node backend
 
-        fetch(`/api/product/update/${itemData._id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-            .then(navigate(`/itemPage/${itemData._id}`))
+            fetch(`/api/product/update/${itemData._id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+                .then(navigate(`/itemPage/${itemData._id}`))
 
-            .catch((err) => console.log(err));
+                .catch((err) => console.log(err));
+        } else {
+            setIsInvalid(true);
+        }
     };
 
     useEffect(() => {
@@ -121,7 +144,10 @@ const Edit = () => {
                     p: 3,
                     borderRadius: 1,
                     marginTop: 5,
+                    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
                 }}
+                // apply red border if invalid
+                style={isInvalid ? { border: "1px solid red" } : {}}
             >
                 <Typography
                     gutterBottom
@@ -253,7 +279,7 @@ const Edit = () => {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <TextField
+                            {/* <TextField
                                 required
                                 id="images"
                                 name="images"
@@ -265,7 +291,72 @@ const Edit = () => {
                                 onChange={(e) => {
                                     setimages([...images, e.target.files]);
                                 }}
-                            />
+                            /> */}
+                            <Box sx={{ display: "flex", alignItems: "center" }}>
+                                <Typography color="text.secondary">
+                                    Images
+                                </Typography>
+                                <ReactFileReader
+                                    base64={true}
+                                    multipleFiles={true}
+                                    handleFiles={(files) => {
+                                        setimages([...images, files.base64]);
+                                    }}
+                                >
+                                    <Button>Upload</Button>
+                                </ReactFileReader>
+                            </Box>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                }}
+                            >
+                                {images.map((image, indexImage) => (
+                                    <Box sx={{ display: "flex", m: 0 }}>
+                                        <Card
+                                            sx={{
+                                                width: "80px",
+                                                height: "80px",
+                                                border: "2px solid black",
+                                                pointer: "none",
+                                                marginY: 1,
+                                                m: 1,
+                                            }}
+                                        >
+                                            <CardMedia
+                                                component="img"
+                                                height="194"
+                                                image={image}
+                                                alt="Paella dish"
+                                            />
+                                        </Card>
+                                        <ClearIcon
+                                            sx={{
+                                                p: 0,
+                                                m: 0,
+                                                border: "1px solid black",
+                                                borderRadius: "100%",
+                                                cursor: "pointer",
+                                                position: "relative",
+                                                left: "-8px",
+                                            }}
+                                            onClick={() => {
+                                                setimages(
+                                                    images.filter(
+                                                        (image, index) => {
+                                                            return (
+                                                                index !==
+                                                                indexImage
+                                                            );
+                                                        }
+                                                    )
+                                                );
+                                            }}
+                                        />
+                                    </Box>
+                                ))}
+                            </Box>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
@@ -290,6 +381,17 @@ const Edit = () => {
                             Update
                         </Button>
                     </Box>
+                    {isInvalid ? (
+                        <Typography
+                            color="primary.main"
+                            variant="h7"
+                            sx={{ textAlign: "center" }}
+                        >
+                            Please fill all the fields
+                        </Typography>
+                    ) : (
+                        <Box />
+                    )}
                 </Box>
             </Box>
         </Box>
