@@ -24,9 +24,10 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 const ItemPage = () => {
     const navigate = useNavigate();
+
     const itemID = useParams().id;
 
-    const { isLoggedIn, user } = useContext(AuthContext);
+    const { user, isLoggedIn } = useContext(AuthContext);
 
     const [itemData, setItemData] = useState({});
     const [imageData, setImageData] = useState([]);
