@@ -5,8 +5,10 @@ import ItemCards from "./Components/ItemCards/ItemCards";
 import { Grid } from "@mui/material";
 import { useParams } from "react-router-dom";
 const CategoryPage = () => {
-    const categoryName = useParams().id;
+    const params = useParams();
+    const categoryName = params.id;
     const [itemData, setItemData] = useState([]);
+    console.log(categoryName);
 
     useEffect(() => {
         fetch(
