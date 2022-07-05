@@ -10,14 +10,11 @@ import {
     Typography,
     Grid,
     Card,
-    CardMedia,
     CardContent,
-    CardActionArea,
     CardActions,
     CardHeader,
     IconButton,
     Avatar,
-    Button,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -44,7 +41,7 @@ const ItemPage = () => {
         fetch(`/api/product/${itemID}`).then((Response) =>
             Response.json().then((data) => handleData(data))
         );
-    }, []);
+    }, [itemID]);
 
     const SampleNextArrow = ({ onClick }) => {
         return (
