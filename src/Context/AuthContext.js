@@ -5,7 +5,8 @@ export const AuthContext = createContext();
 
 export const AuthProvider = (props) => {
     const [user, setUser] = useState({});
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const isLogin = document.cookie.includes("token");
+    const [isLoggedIn, setIsLoggedIn] = useState(isLogin);
 
     useEffect(() => {
         const apiCall = () => {
