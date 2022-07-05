@@ -75,7 +75,7 @@ const NavBar = ({ categoryName }) => {
                                 <Box
                                     onClick={() => {
                                         window.open(
-                                            "http://localhost:5000/auth/outlook",
+                                            "https://olx-clone-iitg.herokuapp.com/auth/outlook",
                                             "_self"
                                         );
                                     }}
@@ -103,7 +103,7 @@ const NavBar = ({ categoryName }) => {
                     <Box
                         onClick={() => {
                             window.open(
-                                "http://localhost:5000/auth/outlook",
+                                "https://olx-clone-iitg.herokuapp.com/auth/outlook",
                                 "_self"
                             );
                         }}

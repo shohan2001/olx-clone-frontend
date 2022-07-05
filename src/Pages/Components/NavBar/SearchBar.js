@@ -12,8 +12,8 @@ const SearchBar = () => {
     const [filteredItems, setFilteredItems] = useState([]);
 
     useEffect(() => {
-        fetch("/api/product").then((Response) =>
-            Response.json().then((data) => setItemList(data.data))
+        fetch("https://olx-clone-iitg.herokuapp.com//api/product").then(
+            (Response) => Response.json().then((data) => setItemList(data.data))
         );
     }, []);
 

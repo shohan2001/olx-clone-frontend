@@ -38,9 +38,9 @@ const ItemPage = () => {
             setImageData(data.images);
         };
 
-        fetch(`/api/product/${itemID}`).then((Response) =>
-            Response.json().then((data) => handleData(data))
-        );
+        fetch(
+            `https://olx-clone-iitg.herokuapp.com/api/product/${itemID}`
+        ).then((Response) => Response.json().then((data) => handleData(data)));
     }, [itemID]);
 
     const SampleNextArrow = ({ onClick }) => {
@@ -305,7 +305,7 @@ const ItemPage = () => {
                                                             : true;
 
                                                     fetch(
-                                                        `/api/product/update/${itemData._id}`,
+                                                        `https://olx-clone-iitg.herokuapp.com/api/product/update/${itemData._id}`,
                                                         {
                                                             method: "PUT",
                                                             headers: {

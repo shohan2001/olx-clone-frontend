@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 const ItemCards = ({ cardDetails }) => {
     const navigate = useNavigate();
     const handleClick = () => {
-        navigate(`/itemPage/${cardDetails._id}`);
+        navigate(
+            `https://olx-clone-iitg.herokuapp.com/itemPage/${cardDetails._id}`
+        );
     };
     return (
         <Card
