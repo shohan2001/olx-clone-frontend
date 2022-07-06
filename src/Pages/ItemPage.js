@@ -39,7 +39,9 @@ const ItemPage = () => {
             setImageData(data.images);
         };
         const apiCallHere = () => {
-            fetch(`/api/product/${itemID}`).then((Response) =>
+            fetch(
+                `https://olx-clone-iitg.herokuapp.com/api/product/${itemID}`
+            ).then((Response) =>
                 Response.json().then((data) => handleData(data))
             );
         };
@@ -308,7 +310,7 @@ const ItemPage = () => {
                                                             : true;
 
                                                     fetch(
-                                                        `/api/product/update/${itemData._id}`,
+                                                        `https://olx-clone-iitg.herokuapp.com/api/product/update/${itemData._id}`,
                                                         {
                                                             method: "PUT",
                                                             headers: {

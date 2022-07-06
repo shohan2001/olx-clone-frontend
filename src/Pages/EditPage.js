@@ -103,13 +103,16 @@ const Edit = () => {
 
             // how to make post request from local react front-end to node backend
 
-            fetch(`api/product/update/${itemData._id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            })
+            fetch(
+                `https://olx-clone-iitg.herokuapp.com/api/product/update/${itemData._id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                }
+            )
                 .then(navigate(`/itemPage/${itemData._id}`))
 
                 .catch((err) => console.log(err));
@@ -130,9 +133,9 @@ const Edit = () => {
             setimages(data.images);
         };
 
-        fetch(`/api/product/${itemID}`).then((Response) =>
-            Response.json().then((data) => handleData(data))
-        );
+        fetch(
+            `https://olx-clone-iitg.herokuapp.com/api/product/${itemID}`
+        ).then((Response) => Response.json().then((data) => handleData(data)));
     }, [itemID]);
     return (
         <Box>

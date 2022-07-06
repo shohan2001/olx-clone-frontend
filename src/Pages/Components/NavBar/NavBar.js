@@ -75,7 +75,7 @@ const NavBar = ({ categoryName }) => {
                                 <Box
                                     onClick={() => {
                                         window.open(
-                                            "https://olx-clone-iitg.herokuapp.com/auth/outlook",
+                                            "http://localhost:5000/auth/outlook",
                                             "_self"
                                         );
                                     }}

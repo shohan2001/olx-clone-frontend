@@ -164,13 +164,16 @@ const Profile = () => {
                             variant="contained"
                             sx={{ borderRadius: 2, marginTop: 4 }}
                             onClick={() => {
-                                fetch("/user/update", {
-                                    method: "PUT",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                    },
-                                    body: JSON.stringify(user),
-                                })
+                                fetch(
+                                    "https://olx-clone-iitg.herokuapp.com/user/update",
+                                    {
+                                        method: "PUT",
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                        },
+                                        body: JSON.stringify(user),
+                                    }
+                                )
                                     .then((res) => navigate("/"))
                                     .catch((err) => console.log(err));
                             }}
