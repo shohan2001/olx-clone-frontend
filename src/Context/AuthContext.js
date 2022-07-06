@@ -11,7 +11,9 @@ export const AuthProvider = (props) => {
     useEffect(() => {
         const apiCall = () => {
             axios
-                .get("https://olx-clone-iitg.herokuapp.com/user")
+                .get("https://olx-clone-iitg.herokuapp.com/user", {
+                    withCredentials: true,
+                })
                 .then((res) => {
                     //   console.log(res.data);
 
