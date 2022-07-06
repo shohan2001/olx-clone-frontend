@@ -100,7 +100,7 @@ const Sell = () => {
 
             // how to make post request from local react front-end to node backend
 
-            fetch(`https://olx-clone-iitg.herokuapp.com/api/product/sell`, {
+            fetch(`/api/product/sell`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),

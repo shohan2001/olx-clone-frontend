@@ -11,9 +11,7 @@ const CategoryPage = () => {
     console.log(categoryName);
 
     useEffect(() => {
-        fetch(
-            `https://olx-clone-iitg.herokuapp.com/api/product/category/${categoryName}`
-        ).then((Response) =>
+        fetch(`/api/product/category/${categoryName}`).then((Response) =>
             Response.json().then((data) => setItemData(data.data))
         );
     }, [categoryName]);
