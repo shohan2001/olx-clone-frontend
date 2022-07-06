@@ -5,15 +5,13 @@ export const AuthContext = createContext();
 
 export const AuthProvider = (props) => {
     const [user, setUser] = useState({});
-    const isLogin = document.cookie.includes("token");
+    const isLogin = document.cookie.includes("successful");
     const [isLoggedIn, setIsLoggedIn] = useState(isLogin);
 
     useEffect(() => {
         const apiCall = () => {
             axios
-                .get("https://olx-clone-iitg.herokuapp.com/user", {
-                    withCredentials: true,
-                })
+                .get("https://olx-clone-iitg.herokuapp.com/user")
                 .then((res) => {
                     //   console.log(res.data);
                     console.res(res);
