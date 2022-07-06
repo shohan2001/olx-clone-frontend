@@ -11,7 +11,7 @@ export const AuthProvider = (props) => {
     useEffect(() => {
         const apiCall = () => {
             axios
-                .get("/user")
+                .get("/user", { withCredentials: true })
                 .then((res) => {
                     //   console.log(res.data);
                     console.res(res);
